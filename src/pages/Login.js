@@ -2,7 +2,14 @@ import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import '../App.css';
-import { divMain, divImg, divContentForm, textLogin, textUpInput, btn } from '../styles/login';
+import {
+  divMain,
+  divImg,
+  divContentForm,
+  textLogin,
+  textUpInput,
+  btn,
+} from '../styles/login';
 import '../styles/Login.css';
 import loginIcon from '../images/loginIcon.png';
 
