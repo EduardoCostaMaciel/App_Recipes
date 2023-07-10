@@ -64,12 +64,11 @@ function ReceitasFavoritasCard({ props: { recipe, index } }) {
       return (
         tags.map((tag) => (
           <p
-            className="tags"
+            className="tags p-1"
             key={ index }
             data-testid={ `${index}-${tag}-horizontal-tag` }
           >
             { tag }
-
           </p>
         ))
       );
@@ -77,46 +76,43 @@ function ReceitasFavoritasCard({ props: { recipe, index } }) {
   };
 
   return (
-    <div>
-      <main className="doneRecipes-container ">
-        <div className="doneRecipes-image">
-          <Link to={ type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}` }>
-            <img
-              alt="Receita Favoritada"
-              src={ image }
-              // className="img-card-favorite"
-              data-testid={ `${index}-horizontal-image` }
-            />
-          </Link>
+    <div className="d-flex justify-content-center w-100 rounded-lg mt-4 mb-4">
+      <div className="doneRecipes-image">
+        <Link to={ type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}` }>
+          <img
+            alt="Receita Favoritada"
+            src={ image }
+            className="shadow"
+            data-testid={ `${index}-horizontal-image` }
+          />
+        </Link>
+      </div>
+
+      <div className="doneRecipes-infos w-25 p-2 shadow">
+        { foodSpecs() }
+
+        {alcoholicOrNot !== ''
+          ? (
+            <span
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              { alcoholicOrNot }
+            </span>
+          )
+          : null}
+
+        <Link to={ type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}` }>
+          <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
+        </Link>
+
+        <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
+
+        <div className="tags-recipes">
+          { tags.length !== null ? crateTags() : null }
         </div>
-
-        <div className="doneRecipes-infos">
-          { foodSpecs() }
-
-          {alcoholicOrNot !== ''
-            ? (
-              <span
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                { alcoholicOrNot }
-              </span>
-            )
-            : null}
-
-          <Link to={ type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}` }>
-            <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-          </Link>
-
-          <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
-
-          <div className="tags-recipes">
-            { tags.length !== null ? crateTags() : null }
-          </div>
-          { createButtons() }
-          {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
-        </div>
-
-      </main>
+        { createButtons() }
+        {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
+      </div>
     </div>
   );
 }

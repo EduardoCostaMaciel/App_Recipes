@@ -1,13 +1,12 @@
 .header-container {
   align-items: center;
   background-color: #ff9654;
-  border-radius: 0 0 15px 15px;
   display: flex;
   flex-flow: row;
   flex-wrap: nowrap;
   justify-content: space-around;
-  margin-bottom: 2px;
   padding-bottom: 5px;
+  width: 100%;
 }
 
 .header-container > h1 {

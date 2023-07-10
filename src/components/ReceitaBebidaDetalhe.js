@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 import RecomendacoesCard from './RecomendacoesCard';
@@ -7,7 +7,7 @@ import Header from './Header';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import { btn } from '../styles/login';
+// import { btn } from '../styles/login';
 
 import '../styles/DetalhesPagina.css';
 
@@ -22,13 +22,13 @@ function ReceitaBebidaDetalhe({ props }) {
 
   const { acctualyDrink, drinkRecomendation, id } = props;
 
-  const checkStatusRecipe = () => {
+  const checkStatusRecipe = useCallback(() => {
     if (JSON.parse(localStorage.getItem('inProgressRecipes') !== null)) {
       const recipes = JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails;
 
       if (Object.keys(recipes).includes(id) === true) setStatusDrink(true);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     const verifyFavorite = () => {
@@ -42,7 +42,7 @@ function ReceitaBebidaDetalhe({ props }) {
 
     checkStatusRecipe();
     verifyFavorite();
-  }, [id]);
+  }, [id, checkStatusRecipe]);
 
   const shareClick = (e) => {
     e.preventDefault();
@@ -128,7 +128,7 @@ function ReceitaBebidaDetalhe({ props }) {
           <Header title="Detalhes da Bebidas" />
           <img
             alt="Produto"
-            className="img-details-main"
+            className="img-details-main shadow"
             data-testid="recipe-photo"
             src={ strDrinkThumb }
           />
@@ -154,7 +154,7 @@ function ReceitaBebidaDetalhe({ props }) {
 
           {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
 
-          <ul className="list-container py-3">
+          <ul className="list-container py-3 shadow">
             <h3 className="text-center pb-3">Ingredients</h3>
             { ingredients.map((ingredient, index) => {
               if (ingredient !== null
@@ -172,14 +172,14 @@ function ReceitaBebidaDetalhe({ props }) {
               return '';
             })}
           </ul>
-          <div className="instruction-container py-3 mt-3">
+          <div className="instruction-container py-3 mt-3 shadow">
             <h3 className="text-center pb-3">Instructions</h3>
             <p data-testid="instructions">{ strInstructions }</p>
           </div>
 
           <h3 className="py-4">Receitas Recomendadas:</h3>
 
-          <div className="recomendation-container">
+          <div className="recomendation-container shadow">
             { drinkRecomendation.map((drink, index) => {
               const cardLength = 5;
               if (index <= cardLength) {
@@ -201,7 +201,8 @@ function ReceitaBebidaDetalhe({ props }) {
             type="button"
             onClick={ handleClick }
             data-testid="start-recipe-btn"
-            className={ `${btn} button-recipe py-3` }
+            // className={ `${btn} button-recipe py-3` }
+            className="button-recipe py-3 shadow"
           >
             { statusDrink === true ? 'Continuar Receita' : 'Iniciar Receita' }
           </Button>

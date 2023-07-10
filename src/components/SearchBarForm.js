@@ -134,7 +134,7 @@ const SearchBarForm = ({ searchBar }) => {
 
   return (
     <div>
-      <Navbar bg="primary" variant="dark">
+      <Navbar bg="primary" variant="dark" className="rounded-bottom">
         <Form className="form">
           { handleSearchBarValue() }
           { handleSearchBarMark() }

@@ -6,6 +6,7 @@ import Loading from './Loading';
 import FavoriteFood from './FavoriteFood';
 import '../App.css';
 import './EmProgressPage/InProgressPage.css';
+import '../styles/DetalhesPagina.css';
 
 function EmProgresso({ props }) {
   const [data, setData] = useState({});
@@ -106,16 +107,17 @@ function EmProgresso({ props }) {
 
   return (
     <div className="pb-4 background-smoked-with">
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column align-items-center">
         <div className="d-flex justify-content-center">
           <img
             data-testid="recipe-photo"
             src={ data.strMealThumb || data.strDrinkThumb }
             alt="meals-img"
-            width="100%"
+            className="shadow mt-5 w-50 rounded-lg"
+            // width="25%"
           />
         </div>
-        <div className="d-flex px-3 justify-content-between text-center">
+        <div className="d-flex w-50 px-3 justify-content-between text-center">
           <div className="py-2">
             <h2 data-testid="recipe-title">{ data.strMeal || data.strDrink }</h2>
           </div>
@@ -125,16 +127,16 @@ function EmProgresso({ props }) {
         <div className="py-2 text-center">
           <h4 data-testid="recipe-category">{ data.strCategory }</h4>
         </div>
-        <div className="bg-primary py-3 text-center">
+        <div className="bg-primary p-5 text-center w-75 rounded-lg shadow">
           <h4 className="py-2">Ingredientes</h4>
           <Ingredientes params={ obj } />
         </div>
 
-        <div className="py-3 my-5 bg-primary text-center">
+        <div className="p-5 my-5 bg-primary text-center w-75 rounded-lg shadow">
           <h4 className="py-2">Instruções</h4>
           <p
             data-testid="instructions"
-            className="text-justify instructions-background"
+            className="text-center instructions-background"
           >
             { data.strInstructions }
           </p>
@@ -142,7 +144,7 @@ function EmProgresso({ props }) {
         <div className="align-self-center w-50">
           <button
             type="button"
-            className="w-100 py-3 finish-button"
+            className="w-100 py-3 finish-button rounded-lg shadow"
             data-testid="finish-recipe-btn"
             onClick={ finishRecipe }
             disabled={ isDisabled }
