@@ -2,21 +2,18 @@ body {
   background-color: whitesmoke;
 }
 
-.doneRecipes-container {
+/* .doneRecipes-container {
   border-radius: 16px;
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
   margin-top: 15px;
-}
+} */
 
 .doneRecipes-infos {
   background-color: #ff9654;
   border-bottom-right-radius: 16px;
   border-top-right-radius: 16px;
-  height: 200px;
-  padding-left: 5px;
-  width: 45%;
 }
 
 .doneRecipes-infos > a {
@@ -25,7 +22,7 @@ body {
 
 .doneRecipes-image {
   height: 200px;
-  width: 45%;
+  width: 16%;
 }
 
 .doneRecipes-image > a > img {

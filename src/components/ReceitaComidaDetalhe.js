@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 import RecomendacoesCard from './RecomendacoesCard';
@@ -6,7 +6,7 @@ import RecomendacoesCard from './RecomendacoesCard';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import { btn } from '../styles/login';
+// import { btn } from '../styles/login';
 
 import '../styles/DetalhesPagina.css';
 import Header from './Header';
@@ -22,27 +22,25 @@ function ReceitaComidaDetalhe({ props }) {
 
   const { acctualyFood, foodRecomendation, id } = props;
 
-  const checkStatusRecipe = () => {
+  const checkStatusRecipe = useCallback(() => {
     if (JSON.parse(localStorage.getItem('inProgressRecipes') !== null)) {
       const recipes = JSON.parse(localStorage.getItem('inProgressRecipes')).meals;
-
       if (Object.keys(recipes).includes(id) === true) setStatusFood(true);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     const verifyFavorite = () => {
       if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
         const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
         const checkRecipe = recipes.find((recipe) => recipe.id === id);
-
         if (checkRecipe) setFavoriteFood(true);
       }
     };
 
     checkStatusRecipe();
     verifyFavorite();
-  }, [id]);
+  }, [id, checkStatusRecipe]);
 
   const shareClick = (e) => {
     e.preventDefault();
@@ -65,16 +63,18 @@ function ReceitaComidaDetalhe({ props }) {
       image: acctualyFood.meals[0].strMealThumb,
     };
 
-    if (favoriteFood !== false
-      && JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
+    if (
+      favoriteFood !== false
+       && JSON.parse(localStorage.getItem('favoriteRecipes') !== null)
+    ) {
       const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
       const filterRecipes = oldRecipes.filter((actualRecipe) => actualRecipe.id !== id);
-
       const newRecipes = [...filterRecipes];
 
       localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
-    } if (favoriteFood !== true) {
+    }
+    if (favoriteFood !== true) {
       if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
         const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
@@ -131,18 +131,22 @@ function ReceitaComidaDetalhe({ props }) {
           <Header title="Detalhes da Camida" />
           <img
             alt="Produto"
-            className="img-details-main"
+            className="img-details-main shadow"
             data-testid="recipe-photo"
             src={ strMealThumb }
           />
           <div className="infos-buttons-container">
             <div className="infos-container">
-              <h2 data-testid="recipe-title">{ strMeal }</h2>
-              <p data-testid="recipe-category">{ strCategory }</p>
+              <h2 data-testid="recipe-title">{strMeal}</h2>
+              <p data-testid="recipe-category">{strCategory}</p>
             </div>
 
             <div className="buttons-container">
-              <button type="button" data-testid="share-btn" onClick={ shareClick }>
+              <button
+                type="button"
+                data-testid="share-btn"
+                onClick={ shareClick }
+              >
                 <img alt="Share link" src={ shareIcon } />
               </button>
               <button type="button" onClick={ favoriteClick }>
@@ -155,37 +159,47 @@ function ReceitaComidaDetalhe({ props }) {
             </div>
           </div>
 
-          {!clipboardStatus ? null : (<h5 className="margin-link">Link copiado!</h5>)}
+          {!clipboardStatus ? null : (
+            <h5 className="margin-link">Link copiado!</h5>
+          )}
 
-          <ul className="list-container py-3">
+          <ul className="list-container py-3 shadow">
             <h3 className="text-center pb-3">Ingredients</h3>
-            { ingredients.map((ingredient, index) => {
+            {ingredients.map((ingredient, index) => {
               if (ingredient !== null && ingredient !== ' ' && ingredient !== '  ') {
                 return (
                   <li
                     key={ ingredient }
                     data-testid={ `${index}-ingredient-name-and-measure` }
                   >
-                    { `- ${ingredient}` }
-                  </li>);
+                    {`- ${ingredient}`}
+                  </li>
+                );
               }
               return null;
             })}
           </ul>
 
-          <div className="instruction-container py-3 mt-3">
+          <div className="instruction-container py-3 mt-3 shadow">
             <h3 className="text-center pb-3">Instructions</h3>
-            <p data-testid="instructions">{ strInstructions }</p>
+            <p data-testid="instructions">{strInstructions}</p>
           </div>
 
-          <div className="video-container pt-3">
-            <iframe data-testid="video" width="320" height="240" src={ `https://www.youtube.com/embed/${youtubeLink}` } title="YouTube video player" frameBorder="0" />
+          <div className="video-container pt- shadow">
+            <iframe
+              data-testid="video"
+              width="320"
+              height="240"
+              src={ `https://www.youtube.com/embed/${youtubeLink}` }
+              title="YouTube video player"
+              frameBorder="0"
+            />
           </div>
 
           <h3 className="py-4">Receitas Recomendadas:</h3>
 
-          <div className="recomendation-container">
-            { foodRecomendation.map((food, index) => {
+          <div className="recomendation-container shadow">
+            {foodRecomendation.map((food, index) => {
               const cardLength = 5;
               if (index <= cardLength) {
                 return (
@@ -198,7 +212,7 @@ function ReceitaComidaDetalhe({ props }) {
                 );
               }
               return null;
-            }) }
+            })}
           </div>
 
           <Button
@@ -206,9 +220,10 @@ function ReceitaComidaDetalhe({ props }) {
             type="button"
             onClick={ handleClick }
             data-testid="start-recipe-btn"
-            className={ `${btn} button-recipe py-3` }
+            // className={ `${btn} button-recipe py-3` }
+            className="button-recipe py-3 shadow"
           >
-            { statusFood === true ? 'Continuar Receita' : 'Iniciar Receita' }
+            {statusFood === true ? 'Continuar Receita' : 'Iniciar Receita'}
             {/* foodRecipeStatus === 'start' ? 'Start recipe' : 'Continuar Receita'  */}
           </Button>
         </div>

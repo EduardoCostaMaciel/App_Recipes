@@ -1,29 +1,40 @@
 .recipe-container {
+  align-items: center;
   background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
 }
 
 .img-details-main {
-  width: 100%;
+  border-radius: 10px;
+  max-width: 25%;
 }
 
 .recomendation-container {
+  background-color: #fabb8b;
+  border-radius: 10px;
   display: flex;
   margin-bottom: 40px;
+  max-width: 40%;
   overflow-x: scroll;
 }
 
 .recomendation-card-img {
-  width: 50vw;
+  height: 290px;
+  width: 20vw;
 }
 
 .button-recipe {
-  bottom: 0;
-  position: fixed;
+  margin-bottom: 2rem;
+  width: 30%;
 }
 
 .infos-buttons-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  width: 80%;
 }
 
 .infos-container {
@@ -52,17 +63,22 @@
 
 .list-container {
   background-color: #fabb8b;
+  border-radius: 10px;
   list-style-type: none;
   padding-left: 10px;
+  width: 80%;
 }
 
 .instruction-container {
   background-color: #fabb8b;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
 }
 
 .instruction-container > p {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .video-container {
@@ -72,6 +88,7 @@
 }
 
 .card-recomendation {
+  height: 340px;
   text-align: center;
 }
 

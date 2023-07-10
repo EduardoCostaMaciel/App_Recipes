@@ -1,9 +1,8 @@
 .explorar-buttons {
   display: flex;
   flex-direction: column;
-  height: 20%;
-  margin-bottom: 48%;
-  margin-top: 30%;
+  height: 80vh;
+  justify-content: center;
 }
 
 .explorar-buttons > button {

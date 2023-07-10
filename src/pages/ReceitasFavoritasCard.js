@@ -76,7 +76,7 @@ function ReceitasFavoritasCard({ props: { recipe, index, setFavoriteRecipes } })
 
   return (
     <div>
-      <main className="favorite-item-container">
+      <main className="d-flex justify-content-center w-100 mt-4 mb-4">
         <div className="favorite-recipe-image">
           <Link to={ type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}` }>
             <img
@@ -88,7 +88,7 @@ function ReceitasFavoritasCard({ props: { recipe, index, setFavoriteRecipes } })
           </Link>
         </div>
 
-        <div className="favorite-recipe-info">
+        <div className="favorite-recipe-info d-flex flex-column w-25 p-2 shadow">
           { type === 'comida'
             ? foodSpecs()
             : drinkSpecs() }

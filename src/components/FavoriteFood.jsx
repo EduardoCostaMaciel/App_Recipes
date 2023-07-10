@@ -144,7 +144,11 @@ function FavoriteFood({ params: { data } }) {
 
   return (
     <div className="buttons-container">
-      <button type="button" data-testid="share-btn" onClick={ shareClick }>
+      <button
+        type="button"
+        data-testid="share-btn"
+        onClick={ shareClick }
+      >
         <img alt="Share link" src={ shareIcon } />
       </button>
       <button type="button" onClick={ (e) => favoriteClick(dados, e) }>
